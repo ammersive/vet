@@ -35,4 +35,11 @@ class Owner extends Model
 
         // return "{$this->address_1}, {$this->address_2}, {$this->town}, {$this->postcode}";   
     }
+
+    public function formattedPhoneNumber()
+    {   
+        $this->telephone = substr_replace($this->telephone, " ", 4, 0);
+        $this->telephone = substr_replace($this->telephone, " ", 8, 0);
+        return $this->telephone;   
+    }
 }
