@@ -63,4 +63,14 @@ class Owner extends Model
     {             
         return DB::table('owners')->where('email', $email)->get()->isNotEmpty(); 
     }
+
+    public function validPhoneNumber()
+    {
+        return preg_match("/(^[0-9-+\s]{11,16}$)/", $this->telephone) === 1; 
+    }
+
+    // public static function validPhoneNumber($number)
+    // {
+    //     return preg_match("/(^[0-9-+\s]{11,16}$)/", $number) === 1; 
+    // }
 }
