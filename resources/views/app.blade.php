@@ -10,17 +10,13 @@
 
         <div class="container">
 
-            <nav class="mt-4 navbar navbar-light bg-light">
-                @yield("nav")
-            </nav>
+            @include("_partials/nav")
 
             <main class="mt-4">
                 @yield("content")
             </main>
 
-            <footer>  
-                @yield("footer")
-            </footer>
+            @include("_partials/footer")            
 
         </div>
 
