@@ -4,9 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Owner extends Model
-{
+{   
+    protected $fillable = ["first_name", "last_name", "telephone", "email", "address_1", "address_2", "town", "postcode"];
+
     use HasFactory;
 
     public function fullName()
@@ -41,5 +44,23 @@ class Owner extends Model
         $this->telephone = substr_replace($this->telephone, " ", 4, 0);
         $this->telephone = substr_replace($this->telephone, " ", 8, 0);
         return $this->telephone;   
+    }
+
+    public static function haveWeBananas($number)
+    {
+        if ($number === 0) {
+            return "No we have no bananas";
+        }
+        else if ($number === 1) {
+            return "Yes we have 1 banana";
+        }
+
+        return "Yes we have {$number} bananas";
+    }
+
+    // Checks if an owner with a given email address already exists
+    public static function checkByEmail($email)
+    {             
+        return DB::table('owners')->where('email', $email)->get()->isNotEmpty(); 
     }
 }
