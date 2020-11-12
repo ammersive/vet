@@ -35,10 +35,10 @@ class EmailTest extends TestCase
         
         $this->assertTrue(Owner::checkByEmail("happyman@royal.mail"));
 
-        $this->assertTrue((Owner::checkByEmail("not@in.db")) === false);
+        $this->assertFalse(Owner::checkByEmail("not@in.db"));
 
-        $this->assertDatabaseHas('owners', ['email' => "happyman@royal.mail",]);
-
-        $this->assertDatabaseMissing('owners', ['email' => "jess@cat.basket",]);
+        // // The below is not really necessary, as we're testing the checkByEmail method
+        // $this->assertDatabaseHas('owners', ['email' => "happyman@royal.mail",]); 
+        // $this->assertDatabaseMissing('owners', ['email' => "jess@cat.basket",]);
     }
 }
