@@ -32,5 +32,10 @@ class EmailTest extends TestCase
         $ownerFromDB = Owner::first();
 
         $this->assertSame("happyman@royal.mail", $ownerFromDB->email);
+        
+        $this->assertTrue(Owner::checkByEmail("happyman@royal.mail"));
+
+        $this->assertTrue((Owner::checkByEmail("not@in.db")) === false);
+
     }
 }
