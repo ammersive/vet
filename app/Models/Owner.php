@@ -51,7 +51,7 @@ class Owner extends Model
         if ($number === 0) {
             return "No we have no bananas";
         }
-        else if ($number === 1) {
+        if ($number === 1) {
             return "Yes we have 1 banana";
         }
 
@@ -68,9 +68,4 @@ class Owner extends Model
     {
         return preg_match("/(^[0-9-+\s]{11,16}$)/", $this->telephone) === 1; 
     }
-
-    // public static function validPhoneNumber($number)
-    // {
-    //     return preg_match("/(^[0-9-+\s]{11,16}$)/", $number) === 1; 
-    // }
 }
