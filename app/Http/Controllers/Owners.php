@@ -29,4 +29,11 @@ class Owners extends Controller
             "owner" => $owner
         ]);
     }
+    // // Replaces above
+    // public function show(Owner $owner)
+    // {
+    //     return view("owners/show", [
+    //         "owner" => $owner
+    //     ]);
+    // }
 }

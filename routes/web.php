@@ -28,3 +28,7 @@ Route::get("/owners/{owner}", [Owners::class, "show"]);
 Route::get('/owners/{id}', function () {
     return view('owner');
 });
+// // Replaces above
+// Route::get('/owners/{owner}', function () {
+//     return view('owner');
+// });
