@@ -12,7 +12,8 @@ class Owners extends Controller
         $owners = Owner::all();
 
         if (count($owners) === 0) {
-            return "No owners in database";
+            // return "No owners in database";
+            return view("noowners");
         }          
 
         return view("owners", [

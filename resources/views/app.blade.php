@@ -12,8 +12,6 @@
 
             @include("_partials/nav")
 
-            <h1>Home (app.blade.php)</h1>
-
             <main class="mt-4">
                 @yield("content")
             </main>
