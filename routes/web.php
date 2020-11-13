@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Owners;
+use App\Http\Controllers\Home;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,7 @@ use App\Http\Controllers\Owners;
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
+Route::get('/', [Home::class, "index"]);
 
 Route::get('/about', function () {
     return view('about');
