@@ -9,10 +9,15 @@ class Owners extends Controller
 {
     public function index()
     {
+        $owners = Owner::all();
+
+        if (count($owners) === 0) {
+            return "No owners in database";
+        }          
+
         return view("owners", [
-            // pass in all the owners
             "owners" => Owner::all(),
-        ]);
+        ]);  
     }
 
     public function show($id)
