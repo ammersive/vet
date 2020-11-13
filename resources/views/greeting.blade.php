@@ -3,7 +3,7 @@
 @section("content")
     <div class="card">
         <article class="card-body">
-            <p>Good morning!</p>
+            <p> {{ $message }} </p>
         </article>
     </div>
 @endsection
