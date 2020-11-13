@@ -3,7 +3,7 @@
 @section("content")
     <div class="list-group">
 
-        @foreach (App\Models\Owner::all() as $owner)
+        @foreach ($owners as $owner)
             @include("_partials/owner")
         @endforeach            
 
