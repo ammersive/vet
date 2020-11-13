@@ -11,13 +11,9 @@ class Owners extends Controller
     {   
         $owners = Owner::all();
 
-        if (count($owners) === 3) {
-            return view("noowners");
-            // $message = "No owners in DB";
-            // return view("app", [
-            //     "content" => $message
-            // ]);
-            // // $message HAS to go into template e.g. {{ $message }}       
+        if (count($owners) === 0) {
+            //you could do this with injecting content, but as you need a new blade template anyway perhaps this is fine
+            return view("noowners"); 
         }    
                 
         return view("owners", [
