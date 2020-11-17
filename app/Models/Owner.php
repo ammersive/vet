@@ -68,4 +68,11 @@ class Owner extends Model
     {
         return preg_match("/(^[0-9-+\s]{11,16}$)/", $this->telephone) === 1; 
     }
+
+    // plural, as an article can have multiple comments
+    public function animals()
+    {
+        // use hasMany relationship method
+        return $this->hasMany(Animal::class);
+    }
 }

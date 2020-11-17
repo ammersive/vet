@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
+   
+    // use singular, as an animal only has one owner   
+    public function owner()
+    {
+    // a comment belongs to an article
+        return $this->belongsTo(Owner::class);
+    }
+
+    public function dangerous()
+    {
+        return $this->biteyness >= 3; 
+    }
 }
