@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Owner;
 use App\Http\Requests\API\OwnerRequest;
+use App\Http\Resources\API\OwnerResource;
+use App\Http\Resources\API\OwnerListResource;
 
 class Owners extends Controller
 {
@@ -15,8 +17,10 @@ class Owners extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return Owner::all();
+    {   
+        // needs to return multiple owners
+        // so we use the collection method
+        return OwnerListResource::collection(Owner::all());
     }
 
     /**
@@ -28,7 +32,8 @@ class Owners extends Controller
     public function store(OwnerRequest $request)
     {        
         $data = $request->all();
-        return Owner::create($data);
+        $owner = Owner::create($data);
+        return new OwnerResource($owner);
     }
 
     /**
@@ -39,7 +44,7 @@ class Owners extends Controller
      */
     public function show(Owner $owner) //Route model binding
     {
-        return $owner;
+        return new OwnerResource($owner);
     }
 
     /**
@@ -53,7 +58,7 @@ class Owners extends Controller
     {
         $data = $request->all();
         $owner->fill($data)->save();
-        return $owner;
+        return new OwnerResource($owner);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Resources\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class OwnerResource extends JsonResource
+class OwnerListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,14 +16,10 @@ class OwnerResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "title" => $this->first_name,
+            "first_name" => $this->first_name,
             "last_name" => $this->last_name,
-            "telephone" => $this->telephone,
-            "email" => $this->email,
-            "address_1" => $this->address_1,
-            "address_2" => $this->address_2,
-            "town" => $this->town,
-            "postcode" => $this->postcode
+            "telephone_formatted" => $this->formattedPhoneNumber(),
+            "full_address" => $this->fullAddress()
         ];
     }
 }
