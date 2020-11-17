@@ -15,7 +15,7 @@ class Home extends Controller
 
         $message = "Good ";
 
-        if ($now < $noon) {
+        if (substr($now, -2) === "am") {
             $message .= "Morning!";
             return view("greeting", ["message" => $message]);
         }
