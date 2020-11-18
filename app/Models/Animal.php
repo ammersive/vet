@@ -28,4 +28,17 @@ class Animal extends Model
     // animals have a many to many relationship with treatments
     return $this->belongsToMany(Treatment::class);
     }
+
+    // just accept an array of strings
+    // we don't want to pass request in as there's no reason models should know about about the request
+    public function setTreatments(array $strings) : Animal
+    {
+        $tags = Treatment::fromStrings($strings);
+        // pass in collection of IDs
+        $this->treatments()->sync($tags->pluck("id"));
+        // return $this in case we want to chain
+        return $this;
+    }
+
+
 }
