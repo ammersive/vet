@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Animal extends Model
 {
     use HasFactory;
+    
+    protected $fillable = ["name", "type", "date_of_birth", "weight", "height", "biteyness", "owner_id"];
    
     // use singular, as an animal only has one owner   
     public function owner()

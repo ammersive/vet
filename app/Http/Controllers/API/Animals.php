@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\API\AnimalResource;
+use App\Models\Owner;
+use App\Models\Animal;
 
 class Animals extends Controller
 {
@@ -12,9 +15,10 @@ class Animals extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Owner $owner)
     {
-        //
+        // return all animals for a given owner
+        return AnimalResource::collection($owner->animals);
     }
 
     /**
@@ -23,9 +27,13 @@ class Animals extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Owner $owner)
     {
-        //
+        $data = $request->all();
+        $animal = new Animal($data);
+        $animal->owner()->associate($owner);
+        $animal->save();
+        return new AnimalResource($animal);
     }
 
     /**
@@ -34,9 +42,10 @@ class Animals extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Owner $owner, Animal $animal)
     {
-        //
+        // return new AnimalResource($animal);
+        return $animal;
     }
 
     /**
@@ -46,9 +55,12 @@ class Animals extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Owner $owner, Animal $animal)
     {
-        //
+        $data = $request->all();
+        $animal->fill($data);
+        $animal->save();
+        return new AnimalResource($animal);
     }
 
     /**
@@ -57,8 +69,9 @@ class Animals extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Owner $owner, Animal $animal)
     {
-        //
+        $animal->delete();
+        return response(null, 204);
     }
 }
