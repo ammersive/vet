@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\API\AnimalResource;
 use App\Models\Owner;
 use App\Models\Animal;
+use App\Http\Resources\API\AnimalFormatResource;
 
 class Animals extends Controller
 {
@@ -18,7 +19,7 @@ class Animals extends Controller
     public function index(Owner $owner)
     {
         // return all animals for a given owner
-        return AnimalResource::collection($owner->animals);
+        return AnimalFormatResource::collection($owner->animals);
     }
 
     /**
@@ -33,7 +34,7 @@ class Animals extends Controller
         $animal = new Animal($data);
         $animal->owner()->associate($owner);
         $animal->save();
-        return new AnimalResource($animal);
+        return new AnimalFormatResource($animal);
     }
 
     /**
@@ -44,8 +45,8 @@ class Animals extends Controller
      */
     public function show(Owner $owner, Animal $animal)
     {
-        // return new AnimalResource($animal);
-        return $animal;
+        return new AnimalFormatResource($animal);
+        // return $animal;
     }
 
     /**
@@ -60,7 +61,7 @@ class Animals extends Controller
         $data = $request->all();
         $animal->fill($data);
         $animal->save();
-        return new AnimalResource($animal);
+        return new AnimalFormatResource($animal);
     }
 
     /**
