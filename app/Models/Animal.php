@@ -22,4 +22,10 @@ class Animal extends Model
     {
         return $this->biteyness >= 3; 
     }
+
+    public function treatments()
+    {
+    // animals have a many to many relationship with treatments
+    return $this->belongsToMany(Treatment::class);
+    }
 }
