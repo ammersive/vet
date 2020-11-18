@@ -10,7 +10,6 @@ class Home extends Controller
     public function index()
     {   
         $now = date("h:i:sa");
-        $noon = "00:00:00pm";
         $eve = "07:00:00pm";
 
         $message = "Good ";

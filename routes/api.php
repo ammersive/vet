@@ -22,11 +22,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(["prefix" => "owners"], function () {
 
     Route::get("", [Owners::class, "index"]); // responds to GET requests that comes from /api/owners
-    Route::post("", [Owners::class, "store"]); // responds to POST requests that comes from /api/owners/{id}
+    Route::post("", [Owners::class, "store"]); // POST from /api/owners/{id}
 
     Route::group(["prefix" => "{owner}"], function () {
-        Route::get("", [Owners::class, "show"]); // responds to GET requests that comes from /api/owners/{id}  
-        Route::delete("", [Owners::class, "destroy"]); // responds to DELETE requests that comes from /api/owners/{id}  , returns a 204
-        Route::put("", [Owners::class, "update"]); // responds to PUT to POST requests that comes from /api/owners/{id}
+        Route::get("", [Owners::class, "show"]); // GET /api/owners/{id}  
+        Route::put("", [Owners::class, "update"]); // PUT /api/owners/{id}
+        Route::delete("", [Owners::class, "destroy"]); // DELETE /api/owners/{id}, returns a 204
+
+        Route::group(["prefix" => "{animals}"], function () {
+            Route::get("", [Animals::class, "index"]); // GET /api/owners/owner_id/animals
+            Route::post("", [Animals::class, "store"]); // POST /api/owners/owner_id/animals
+            
+            Route::group(["prefix" => "{animal}"], function () {
+                Route::get("", [Animals::class, "show"]); // GET /api/owners/owner_id/animals/{id} 
+                Route::put("", [Animals::class, "update"]); // PUT /api/owners/owner_id/animals/{id} 
+                Route::delete("", [Animals::class, "destroy"]); // /api/owners/owner_id/animals/{id} , returns a 204
+            });
+        });    
     });
 });
