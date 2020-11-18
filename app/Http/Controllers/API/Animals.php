@@ -28,13 +28,19 @@ class Animals extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Owner $owner)
+    // public function store(Request $request, Owner $owner)
+    // {
+    //     $data = $request->all();
+    //     $animal = new Animal($data);
+    //     $animal->owner()->associate($owner);
+    //     $animal->save();
+    //     return new AnimalFormatResource($animal);
+    // }
+    public function store(AnimalRequest $request)
     {
         $data = $request->all();
-        $animal = new Animal($data);
-        $animal->owner()->associate($owner);
-        $animal->save();
-        return new AnimalFormatResource($animal);
+        $animal = Animal::create($data)->setTreatments($request->get("treatments"));
+        return new AnimalResource($article);
     }
 
     /**
@@ -56,12 +62,21 @@ class Animals extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Owner $owner, Animal $animal)
+    // public function update(Request $request, Owner $owner, Animal $animal)
+    // {
+    //     $data = $request->all();
+    //     $animal->fill($data);
+    //     $animal->save();
+    //     return new AnimalFormatResource($animal);
+    // }
+    public function update(AnimalRequest $request, Animal $animal)
     {
-        $data = $request->all();
-        $animal->fill($data);
-        $animal->save();
-        return new AnimalFormatResource($animal);
+    // update the animal first
+    $data = $request->all();
+    $animal->fill($data)->save();
+    // use the new method - can't chain as save returns a bool
+    $animal->setTreatments($request->get("treatments"));
+    return new AnimalResource($animal);
     }
 
     /**
