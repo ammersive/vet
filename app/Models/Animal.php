@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// ummm...
+// use App\Models\Collection;
 
 class Animal extends Model
 {
@@ -33,12 +35,10 @@ class Animal extends Model
     // we don't want to pass request in as there's no reason models should know about about the request
     public function setTreatments(array $strings) : Animal
     {
-        $tags = Treatment::fromStrings($strings);
+        $treatments = Treatment::fromStrings($strings);
         // pass in collection of IDs
-        $this->treatments()->sync($tags->pluck("id"));
+        $this->treatments()->sync($treatments->pluck("id"));
         // return $this in case we want to chain
         return $this;
     }
-
-
 }
