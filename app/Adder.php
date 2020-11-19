@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Adder
+Class Adder
 {
     private $num1;
     private $num2;
