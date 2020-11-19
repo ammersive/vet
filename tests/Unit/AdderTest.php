@@ -12,7 +12,10 @@ class AdderTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    
+    private $adder;
+    
+     public function testExample()
     {
         $this->assertTrue(true);
     }

@@ -12,6 +12,8 @@ class FizzBuzzTest extends TestCase
      *
      * @return void
      */
+    private $fizzbuzz;
+
     public function setUp() : void
     {
         $this->fizzbuzz = new FizzBuzz();
