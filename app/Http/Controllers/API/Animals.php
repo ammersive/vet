@@ -36,7 +36,7 @@ class Animals extends Controller
         // $animal = Animal::create($data); // :: create creates a database record, needs to know owner_id
         $animal->owner()->associate($owner);
         $animal->save();
-        $animal->setTreatments($request->get("treatments")); 
+        $animal->setTreatments($request->get("treatments")); // taking data from request
         return new AnimalFormatResource($animal);
     }
     // public function store(AnimalRequest $request, Owner $owner)
