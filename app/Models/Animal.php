@@ -9,8 +9,9 @@ class Animal extends Model
 {
     use HasFactory;
     
-    protected $fillable = ["name", "type", "date_of_birth", "weight", "height", "biteyness", "owner_id"];
-   
+    // protected $fillable = ["name", "type", "date_of_birth", "weight", "height", "biteyness", "owner_id"];
+    protected $fillable = ["name", "type", "date_of_birth", "weight", "height", "biteyness"];
+
     // use singular, as an animal only has one owner   
     public function owner()
     {
