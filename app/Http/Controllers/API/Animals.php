@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Resources\API\AnimalResource;
+use App\Http\Requests\API\AnimalRequest;
 use App\Models\Owner;
 use App\Models\Animal;
 use App\Http\Resources\API\AnimalFormatResource;
@@ -40,7 +41,7 @@ class Animals extends Controller
     {
         $data = $request->all();
         $animal = Animal::create($data)->setTreatments($request->get("treatments"));
-        return new AnimalResource($article);
+        return new AnimalResource($animal);
     }
 
     /**
