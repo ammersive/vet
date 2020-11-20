@@ -23,8 +23,7 @@ class AnimalResource extends JsonResource
             "height" => $this->height,
             "biteyness" => $this->biteyness,            
             "treatments" => $this->treatments->pluck("name"), // pluck the name property of each treatment
-            "owner" => $this->owner->fullName()
-            
+            "owner" => $this->owner->fullName()            
         ];
     }
 }

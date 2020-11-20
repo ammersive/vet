@@ -48,6 +48,7 @@ class Animals extends Controller
      */
     public function show(Owner $owner, Animal $animal)
     {
+        $this->checkAccess($owner, $animal);
         return new AnimalResource($animal);
         // return $animal;
     }
@@ -79,5 +80,12 @@ class Animals extends Controller
     {
         $animal->delete();
         return response(null, 204);
+    }
+
+    private function checkAccess(Owner $owner, Animal $animal)
+    {
+        if ($owner->id !== $animal->owner_id){
+            abort(403, 'This animal does not belong to this owner.');
+        }
     }
 }
