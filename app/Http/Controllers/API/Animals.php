@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Resources\API\AnimalResource;
 use App\Http\Requests\API\AnimalRequest;
+use App\Http\Resources\API\AnimalResource;
+use App\Http\Resources\API\AnimalFormatResource;
 use App\Models\Owner;
 use App\Models\Animal;
-use App\Http\Resources\API\AnimalFormatResource;
 
 class Animals extends Controller
 {
@@ -32,13 +32,16 @@ class Animals extends Controller
     public function store(Request $request, Owner $owner)
     {
         $data = $request->all();
-        $animal = new Animal($data);
-        // $animal = Animal::create($data); // :: create creates a database record, needs to know owner_id
-        $animal->owner()->associate($owner);
-        $animal->save();
-        $animal->setTreatments($request->get("treatments")); // taking data from request
+        // $animal_data = $request->only("name", "type", "date_of_birth", "weight", "height", "biteyness", "owner_id");
+        $animal = new Animal($data); // create new animal IN MEMORY 
+        $animal->owner()->associate($owner); // set owner IN MEMORY
+        $animal->save(); // only now, save to the database
+        $animal->setTreatments($request->get("treatments")); // now we call set treatments method on a database entry
         return new AnimalFormatResource($animal);
     }
+
+    // ** Compare with Animal::create($data), which would create a database record, but the DB will reject this we've set up db to expect us to enforce the owner_id (which we do with associate owner)
+
     // public function store(AnimalRequest $request, Owner $owner)
     // {
     //     $data = $request->all();
@@ -80,7 +83,7 @@ class Animals extends Controller
         $animal->fill($data)->save();
         // use the new method - can't chain as save returns a bool
         $animal->setTreatments($request->get("treatments"));
-        return new AnimalResource($animal);
+        return new AnimalFormatResource($animal);
     }
 
     /**
