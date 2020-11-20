@@ -46,4 +46,10 @@ class CrackerTest extends TestCase
     {
         $this->assertSame("hello mum", $this->cracker->decrypt("&.aad bjb"));
     }
+
+    public function testWithNewKey()
+    {
+        $newKeyCracker = new Cracker(") # ( . * % & > < @ a b c d e f g h i j k l m n o !");
+        $this->assertSame("a b c", $newKeyCracker->decrypt(") # ("));
+    }
 }
